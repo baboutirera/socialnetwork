@@ -1,10 +1,16 @@
 <template>
     <h1 class="container">Vue Router !</h1>
+    <my-button>Mis a jours</my-button>
+    <my-input/>
 </template>
 
 <script>
+
     export default {
-        name: "Container"
+        name: "Container",
+        components: {
+
+        }
     }
 </script>
 
