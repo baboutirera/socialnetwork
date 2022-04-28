@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Laravel\Passport\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -11,8 +12,32 @@ use Illuminate\Support\Facades\Validator;
 class AuthController extends Controller
 {
     //
-    public function login() {
+    public function login(Request $request) {
 
+        $validator = Validator::make($request->all(), [
+            'email' => 'required | string | email | max:255 ',
+            'password' => 'required | between:8, 255 '
+        ]);
+
+        if ($validator->fails()) {
+            # code...
+            return response(['errors' => $validator->errors()->all()], 422);
+        }
+
+        $passwordGrantClient = Client::Where('password_client', 1)->first();
+
+        $data = [
+            'grant_type' => 'password',
+            'client_id' => $passwordGrantClient->id,
+            'client_secret' => $passwordGrantClient->secret,
+            'username' => $request->email,
+            'password' => $request->password,
+            'scope' => '*'
+        ];
+
+        $tokenRequest = Request::create('/oauth/token', 'post', $data);
+
+        return app()->handle($tokenRequest);
     }
 
     public function register(Request $request) {
