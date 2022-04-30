@@ -9,6 +9,7 @@ window.Vue = require('vue').default;
 import { createApp } from 'vue';
 import router from './router';
 import components from './components/UI';
+import store from './store';
 
 const app = createApp({});
 
@@ -26,12 +27,10 @@ components.forEach(component => {
     app.component(component.name, component)
 });
 
-
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-app.use(router).mount("#app");
+app.use(router).use(store).mount("#app");
