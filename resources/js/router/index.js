@@ -6,6 +6,7 @@ import Dashboard from '../views/pages/Dahboard.vue';
 import UserProfile from '../views/pages/UserProfile.vue';
 import Middleware from '../middleware';
 import store from '../store';
+import middlewarePipeline from './middlewarePipeline.js';
 
 const routes = [
     {
@@ -35,18 +36,15 @@ const routes = [
         component: Dashboard,
         meta: {
             middleware: [Middleware.auth]
-        },
-        children: [
-
-            {
-                path: "dashboard/userprofile",
-                name: "dashboard.userprofile",
-                component: UserProfile,
-                meta: {
-                    middleware: [Middleware.auth, Middleware.isSubscribed]
-                }
-            },
-        ]
+        }
+    },
+    {
+        path: "/dashboard/userprofile",
+        name: "/dashboard.userprofile",
+        component: UserProfile,
+        meta: {
+            middleware: [Middleware.auth, Middleware.isSubscribed]
+        }
     },
 ];
 
@@ -71,6 +69,7 @@ router.beforeEach((to, from, next)=>{
 
     return middleware[0] ({
         ...context,
+        next: middlewarePipeline(context, middleware, 1)
     })
 })
 

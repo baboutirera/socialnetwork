@@ -18037,7 +18037,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm-bundler.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm-bundler.js");
 /* harmony import */ var _views_layout_Container_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../views/layout/Container.vue */ "./resources/js/views/layout/Container.vue");
 /* harmony import */ var _views_Auth_Register_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../views/Auth/Register.vue */ "./resources/js/views/Auth/Register.vue");
 /* harmony import */ var _views_Auth_Login_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/Auth/Login.vue */ "./resources/js/views/Auth/Login.vue");
@@ -18045,12 +18045,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_pages_UserProfile_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../views/pages/UserProfile.vue */ "./resources/js/views/pages/UserProfile.vue");
 /* harmony import */ var _middleware__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../middleware */ "./resources/js/middleware/index.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../store */ "./resources/js/store/index.js");
+/* harmony import */ var _middlewarePipeline_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./middlewarePipeline.js */ "./resources/js/router/middlewarePipeline.js");
 /* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -18084,19 +18086,18 @@ var routes = [{
   component: _views_pages_Dahboard_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
   meta: {
     middleware: [_middleware__WEBPACK_IMPORTED_MODULE_5__["default"].auth]
-  },
-  children: [{
-    path: "dashboard/userprofile",
-    name: "dashboard.userprofile",
-    component: _views_pages_UserProfile_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-    meta: {
-      middleware: [_middleware__WEBPACK_IMPORTED_MODULE_5__["default"].auth, _middleware__WEBPACK_IMPORTED_MODULE_5__["default"].isSubscribed]
-    }
-  }]
+  }
+}, {
+  path: "/dashboard/userprofile",
+  name: "/dashboard.userprofile",
+  component: _views_pages_UserProfile_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+  meta: {
+    middleware: [_middleware__WEBPACK_IMPORTED_MODULE_5__["default"].auth, _middleware__WEBPACK_IMPORTED_MODULE_5__["default"].isSubscribed]
+  }
 }];
-var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_7__.createRouter)({
+var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_8__.createRouter)({
   routes: routes,
-  history: (0,vue_router__WEBPACK_IMPORTED_MODULE_7__.createWebHistory)(process.env.BASE_URL)
+  history: (0,vue_router__WEBPACK_IMPORTED_MODULE_8__.createWebHistory)(process.env.BASE_URL)
 });
 router.beforeEach(function (to, from, next) {
   if (!to.meta.middleware) {
@@ -18110,9 +18111,47 @@ router.beforeEach(function (to, from, next) {
     next: next,
     store: _store__WEBPACK_IMPORTED_MODULE_6__["default"]
   };
-  return middleware[0](_objectSpread({}, context));
+  return middleware[0](_objectSpread(_objectSpread({}, context), {}, {
+    next: (0,_middlewarePipeline_js__WEBPACK_IMPORTED_MODULE_7__["default"])(context, middleware, 1)
+  }));
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
+
+/***/ }),
+
+/***/ "./resources/js/router/middlewarePipeline.js":
+/*!***************************************************!*\
+  !*** ./resources/js/router/middlewarePipeline.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function middlewarePipeline(context, middleware, index) {
+  var nextMiddleware = middleware[index];
+
+  if (!nextMiddleware) {
+    return context.next;
+  }
+
+  return function () {
+    var nextPipeline = middlewarePipeline(context, middleware, index + 1);
+    nextMiddleware(_objectSpread(_objectSpread({}, context), {}, {
+      next: nextPipeline
+    }));
+  };
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (middlewarePipeline);
 
 /***/ }),
 
@@ -18152,7 +18191,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var state = {
   user: {
-    loggedIn: false,
+    loggedIn: true,
     isSubscribed: true,
     token: !localStorage.getItem('token') || ''
   }
