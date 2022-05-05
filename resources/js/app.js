@@ -6,6 +6,7 @@
 
 
 window.Vue = require('vue').default;
+
 import { createApp } from 'vue';
 import router from './router';
 import components from './components/UI';
@@ -24,7 +25,7 @@ const app = createApp({});
 
 // Nous pouvons apresant utiliser nos composant dans tous les dossier de notre project
 components.forEach(component => {
-    app.component(component.name, component)
+    app.component(component.name, component);
 });
 
 /**
