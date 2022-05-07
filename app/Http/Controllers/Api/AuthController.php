@@ -41,9 +41,10 @@ class AuthController extends Controller
     }
 
     public function register(Request $request) {
+
         $validator = Validator::make($request->all(), [
             'name' => 'required | string | max:255',
-            'email' => 'required | string | email | max:255 | unique:users',
+            'email' => 'required | string | max:255 | email | unique:users',
             'password' => 'required | between:8, 255 | confirmed'
         ]);
 
@@ -63,6 +64,6 @@ class AuthController extends Controller
             return response()->json(['success' => false, 'message' => "échec de l'enregistrement"], 500);
         }
 
-        return response()->json(['success' => true, 'message' => "inscription réussie"], 200);
+        return response()->json(['errors' => true, 'message' => "inscription réussie"], 200);
     }
 }

@@ -2,13 +2,12 @@
     <div>
         <div class="register-page">
             <form class="form">
-                <my-input type="text" placeholder="email address" v-model="user.email"/>
-                <my-input type="text" placeholder="password" v-model="user.password"/>
-                <my-input type="text" placeholder="password" v-model="user.password_confirmation"/>
-                <my-button type="submit">register</my-button>
-                <router-link to="/login">
-                    <p class="message">Créer un compte<a href="#"> S'identifier</a></p>
-                </router-link>
+                <my-input text="text" placeholder="user name" v-model="user.name" />
+                <my-input text="text" placeholder="email address" v-model="user.email" />
+                <my-input text="text" placeholder="password" v-model="user.password" />
+                <my-input text="text" placeholder="password confirmation" v-model="user.password_confirmation" />
+                <my-button type="submit" @click.prevent="register">register</my-button>
+                <router-link to="/login"><p class="message">Déjà enregistré ?<a href="#"> s'identifier</a></p></router-link>
             </form>
         </div>
     </div>
@@ -19,11 +18,18 @@
         name: "Register",
         data: () => ({
             user: {
-                email:"",
+                name: "",
+                email: "",
                 password: "",
-                password_confirmation: ""
+                password_confirmation: "",
             }
-        })
+        }),
+
+        methods: {
+            register() {
+                this.$store.dispatch('auth/registerUser', this.user);
+            }
+        }
     }
 </script>
 

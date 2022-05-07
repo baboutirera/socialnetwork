@@ -28,17 +28,17 @@ const routes = [
         path: "/dashboard",
         name: Dashboard,
         component: Dashboard,
-        meta: {
-            middleware: [Middleware.auth]
-        }
+        // meta: {
+        //     middleware: [Middleware.auth]
+        // }
     },
     {
         path: "/dashboard/userprofile",
         name: "/dashboard.userprofile",
         component: UserProfile,
-        meta: {
-            middleware: [Middleware.auth, Middleware.isSubscribed]
-        }
+        // meta: {
+        //     middleware: [Middleware.auth, Middleware.isSubscribed]
+        // }
     },
 ];
 

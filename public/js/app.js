@@ -19761,7 +19761,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "login",
+  name: "Login",
   data: function data() {
     return {
       user: {
@@ -19769,6 +19769,11 @@ __webpack_require__.r(__webpack_exports__);
         password: ""
       }
     };
+  },
+  methods: {
+    login: function login() {
+      this.$store.dispatch('auth/loginUser', this.user);
+    }
   }
 });
 
@@ -19790,11 +19795,17 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       user: {
+        name: "",
         email: "",
         password: "",
         password_confirmation: ""
       }
     };
+  },
+  methods: {
+    register: function register() {
+      this.$store.dispatch('auth/registerUser', this.user);
+    }
   }
 });
 
@@ -19976,7 +19987,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_my_button, {
-    type: "submit"
+    type: "submit",
+    onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($options.login, ["prevent"])
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_3];
@@ -19984,7 +19996,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  }, 8
+  /* PROPS */
+  , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: "/register"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -20028,9 +20042,9 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
     "class": "message"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Créer un compte"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Déjà enregistré ?"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     href: "#"
-  }, " S'identifier")], -1
+  }, " s'identifier")], -1
   /* HOISTED */
   );
 });
@@ -20043,34 +20057,44 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_my_input, {
-    type: "text",
+    text: "text",
+    placeholder: "user name",
+    modelValue: _ctx.user.name,
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return _ctx.user.name = $event;
+    })
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_my_input, {
+    text: "text",
     placeholder: "email address",
     modelValue: _ctx.user.email,
-    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return _ctx.user.email = $event;
     })
   }, null, 8
   /* PROPS */
   , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_my_input, {
-    type: "text",
+    text: "text",
     placeholder: "password",
     modelValue: _ctx.user.password,
-    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return _ctx.user.password = $event;
     })
   }, null, 8
   /* PROPS */
   , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_my_input, {
-    type: "text",
-    placeholder: "password",
+    text: "text",
+    placeholder: "password confirmation",
     modelValue: _ctx.user.password_confirmation,
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return _ctx.user.password_confirmation = $event;
     })
   }, null, 8
   /* PROPS */
   , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_my_button, {
-    type: "submit"
+    type: "submit",
+    onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($options.register, ["prevent"])
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_3];
@@ -20078,7 +20102,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  }, 8
+  /* PROPS */
+  , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: "/login"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -20390,17 +20416,17 @@ var routes = [{
 }, {
   path: "/dashboard",
   name: _views_pages_Dahboard_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-  component: _views_pages_Dahboard_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-  meta: {
-    middleware: [_middleware__WEBPACK_IMPORTED_MODULE_5__["default"].auth]
-  }
+  component: _views_pages_Dahboard_vue__WEBPACK_IMPORTED_MODULE_3__["default"] // meta: {
+  //     middleware: [Middleware.auth]
+  // }
+
 }, {
   path: "/dashboard/userprofile",
   name: "/dashboard.userprofile",
-  component: _views_pages_UserProfile_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-  meta: {
-    middleware: [_middleware__WEBPACK_IMPORTED_MODULE_5__["default"].auth, _middleware__WEBPACK_IMPORTED_MODULE_5__["default"].isSubscribed]
-  }
+  component: _views_pages_UserProfile_vue__WEBPACK_IMPORTED_MODULE_4__["default"] // meta: {
+  //     middleware: [Middleware.auth, Middleware.isSubscribed]
+  // }
+
 }];
 var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_8__.createRouter)({
   routes: routes,
@@ -20501,12 +20527,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
+
 
 var state = {
   userDetails: {},
   isLoggedIn: false
 };
-var actions = {};
+var actions = {
+  registerUser: function registerUser(_ref, user) {
+    _objectDestructuringEmpty(_ref);
+
+    return new Promise(function (resolve, reject) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/register', {
+        name: user.name,
+        email: user.email,
+        password: user.password,
+        password_confirmation: user.password_confirmation
+      }).then(function (response) {
+        if (response.data) {
+          window.location.replace("/login");
+          resolve(response);
+        } else {
+          reject(response);
+        }
+      })["catch"](function (error) {
+        reject(error);
+      });
+    });
+  },
+  loginUser: function loginUser(ctx, payload) {
+    return new Promise(function (resolve, reject) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/login", payload).then(function (response) {
+        if (response.data.access_token) {
+          localStorage.setItem('token', response.data.access_token);
+          window.location.replace("/dashboard");
+        }
+      })["catch"](function (error) {
+        reject(error);
+      });
+    });
+  }
+};
 var mutations = {};
 var getters = {
   loggedIn: function loggedIn(state) {
@@ -20541,7 +20603,7 @@ var state = {
   user: {
     loggedIn: true,
     isSubscribed: true,
-    token: !localStorage.getItem('token') || ''
+    token: localStorage.getItem('token') || ''
   }
 };
 var actions = {};
