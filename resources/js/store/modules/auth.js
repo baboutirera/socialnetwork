@@ -2,7 +2,7 @@ import axios from "axios";
 
 const state = {
     userDetails: {},
-    isLoggedIn: false
+    isLoggedIn: true,
 }
 
 const actions = {
@@ -44,17 +44,40 @@ const actions = {
                     reject(error);
                 })
         })
+    },
+
+    logout(ctx) {
+        return new Promise((resolve) => {
+            localStorage.removeItem('token');
+            ctx.commit('setLoggedIn', false);
+            resolve(true);
+            window.location.replace("login");
+        })
+    },
+
+    setLoggedInstate(ctx) {
+        return new Promise((resolve) => {
+            if (localStorage.getItem('token')) {
+                ctx.commit('setLoggedIn', true);
+                resolve(true);
+            }
+
+            ctx.commit('setLoggedIn', false);
+            resolve(false);
+        })
     }
-
-
 }
 
-const mutations = {}
+const mutations = {
+    setLoggedIn(state, payload) {
+        state.isLoggedIn = payload;
+    }
+}
 
 const getters = {
 
     loggedIn(state) {
-        return state.loggedIn
+        return state.isLoggedIn
     },
 
     userDetails(state) {
