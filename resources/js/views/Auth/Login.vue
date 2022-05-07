@@ -33,8 +33,8 @@
                 this.$store.dispatch('auth/loginUser', this.user)
             },
             checkUserState() {
-            this.$store.dispatch('auth/setLoggedInstate', this.user)
-        }
+                this.$store.dispatch('auth/setLoggedInstate', this.user)
+            }
         },
 
 

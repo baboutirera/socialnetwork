@@ -35,9 +35,26 @@ class AuthController extends Controller
             'scope' => '*'
         ];
 
-        $tokenRequest = Request::create('/oauth/token', 'post', $data);
+        // $tokenRequest = Request::create('/oauth/token', 'post', $data);
 
-        return app()->handle($tokenRequest);
+        // return app()->handle($tokenRequest);
+
+        $tokenRequest = Request::create('/oauth/token', 'post', $data);
+        $tokenResponse = app()->handle($tokenRequest);
+        $contentString = $tokenResponse->getContent();
+        $tokenContent = json_decode($contentString, true);
+
+        // dd($tokenContent);
+
+        if (!empty($tokenContent['access_token'])) {
+            # code...
+            return $tokenResponse;
+        }
+
+        return response()->json([
+            'message' => 'Unauthenticated'
+        ]);
+
     }
 
     public function register(Request $request) {
