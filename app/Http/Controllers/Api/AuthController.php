@@ -52,8 +52,8 @@ class AuthController extends Controller
         }
 
         return response()->json([
-            'message' => 'Unauthenticated'
-        ]);
+            'error' => "les informations d'identification invalides"
+        ], 401);
 
     }
 
