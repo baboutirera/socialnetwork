@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ResetPasswordController;
+use App\Http\Controllers\Api\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +28,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login');
 
 });
+
+Route::post('forgot-password', [ForgotPasswordController::class, "sendResetLinkEmail"]);
+Route::post('reset-password', [ResetPasswordController::class, "reset"]);
 
