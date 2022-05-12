@@ -7,6 +7,8 @@ import UserProfile from '../views/pages/UserProfile.vue';
 import Middleware from '../middleware';
 import store from '../store';
 import middlewarePipeline from './middlewarePipeline.js';
+import ForgotPassword from "../views/Auth/ForgotPassword.vue";
+import ResetPassword from "../views/Auth/ResetPassword.vue";
 
 const routes = [
     {
@@ -39,6 +41,16 @@ const routes = [
         // meta: {
         //     middleware: [Middleware.auth, Middleware.isSubscribed]
         // }
+    },
+    {
+        path: "/forgot-password",
+        name: ForgotPassword,
+        component: ForgotPassword,
+    },
+    {
+        path: "/reset-password",
+        name: ResetPassword,
+        component: ResetPassword,
     },
 ];
 

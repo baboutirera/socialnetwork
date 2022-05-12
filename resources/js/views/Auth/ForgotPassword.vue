@@ -5,16 +5,12 @@
             Les informations d'identification invalides
         </div>
         <validation-errors v-if="validationErrors" :errors="validationErrors"></validation-errors>
-        <div class="login-page">
+        <div class="forgot-page">
             <form class="form">
                 <my-input type="text" placeholder="email address" v-model="user.email"/>
-                <my-input type="text" placeholder="password" v-model="user.password"/>
-                <my-button type="submit" @click.prevent="login">login</my-button>
-                <router-link to="/register">
-                    <p class="message">Non enregistrer ?<a href="#"> Créer un compte</a></p>
-                </router-link>
-                <router-link to="/forgot-password">
-                    <p class="message">Mot de passe oublié ?<a href="#"> Réinitialiser le mot de passe</a></p>
+                <my-button type="submit" @click.prevent="sendForgotPassword">Send email</my-button>
+                <router-link to="/login">
+                    <p class="message">Aller à la page de connexion ?<a href="#"> s'identifier</a></p>
                 </router-link>
             </form>
         </div>
@@ -22,15 +18,14 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex'
+    import { mapActions, mapGetters } from 'vuex';
 
     export default {
-        name: "Login",
+        name: "ForgotPassword",
 
         data: () => ({
             user: {
                 email:"",
-                password: ""
             }
         }),
 
@@ -47,8 +42,13 @@
 
         methods: {
 
-            login() {
-                this.$store.dispatch('auth/loginUser', this.user)
+            ...mapActions({
+                checkUserState: 'auth/setLoggedInstate',
+                forgotPassword: 'auth/forgotPassword',
+            }),
+
+            sendForgotPassword() {
+                this.$store.dispatch('auth/forgotPassword', this.user)
             },
 
             checkUserState() {
@@ -57,12 +57,11 @@
 
         },
 
-
     }
 </script>
 
 <style lang="scss">
-    .login-page{
+    .forgot-page{
         width: 360px;
         padding: 8% 0 0;
         margin: auto;

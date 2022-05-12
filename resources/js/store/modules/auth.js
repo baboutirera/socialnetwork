@@ -66,16 +66,45 @@ const actions = {
     },
 
     setLoggedInstate(ctx) {
+
         return new Promise((resolve) => {
+
             if (localStorage.getItem('token')) {
                 ctx.commit('setLoggedIn', true);
                 resolve(true);
+            }else {
+                ctx.commit('setLoggedIn', false);
+                resolve(false);
             }
 
-            ctx.commit('setLoggedIn', false);
-            resolve(false);
+        })
+    },
+
+    forgotPassword(ctx, user) {
+        return new Promise((resolve, reject) => {
+            axios
+                .post('/api/forgot-password', {
+                    email: user.email,
+                })
+                .then(response => {
+                    if (response.data) {
+                        window.location.replace("/login")
+                        resolve(response)
+                    } else {
+                        reject(response)
+                    }
+                })
+                .catch((error) => {
+                    console.log(error.response)
+                    if (error.response.status === 422) {
+                        ctx.commit('setError', error.response.data.error)
+                    } else if (error.response.status === 500) {
+                        ctx.commit('setInvalidCredentials', error.response.data.error)
+                    }
+                })
         })
     }
+
 }
 
 const mutations = {
