@@ -15,8 +15,8 @@ class AuthController extends Controller
     public function login(Request $request) {
 
         $validator = Validator::make($request->all(), [
-            'email' => 'required | string | email | max:255 ',
-            'password' => 'required | between:8, 255 '
+            'email' => 'required | string | email | max:255',
+            'password' => 'required | between:8, 255'
         ]);
 
         if ($validator->fails()) {
@@ -35,16 +35,10 @@ class AuthController extends Controller
             'scope' => '*'
         ];
 
-        // $tokenRequest = Request::create('/oauth/token', 'post', $data);
-
-        // return app()->handle($tokenRequest);
-
         $tokenRequest = Request::create('/oauth/token', 'post', $data);
         $tokenResponse = app()->handle($tokenRequest);
         $contentString = $tokenResponse->getContent();
         $tokenContent = json_decode($contentString, true);
-
-        // dd($tokenContent);
 
         if (!empty($tokenContent['access_token'])) {
             # code...
