@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Laravel\Passport\Client;
@@ -64,11 +65,15 @@ class AuthController extends Controller
             return response(['errors' => $validator->errors()->all()], 422);
         }
 
+        $developerRole = Role::developer()->first();
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
+
+        $user->roles()->attach($developerRole->id);
 
         if (!$user) {
             # code...

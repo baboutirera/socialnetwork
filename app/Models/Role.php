@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use HasPermissions;
+use App\Traits\HasPermissions;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -16,5 +16,13 @@ class Role extends Model
 
     public function hasPermissionTo(...$permissions) {
         return $this->permissions()->WhereIn('slug', $permissions)->count();
+    }
+
+    public function scopeDeveloper($query) {
+        return $this->where('slug', 'developer');
+    }
+
+    public function scopeAdmin($query) {
+        return $this->where('slug', 'admin');
     }
 }
